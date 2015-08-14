@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Brieffenster-Generator</title>
+</head>
+<body>
+
+{% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+{% endfor %}
+
+{% block body %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block body %}
+    <h1>Erstellung des Briefkopfes</h1>
+    <form action="/generate" method="post">
+        <fieldset>
+            <legend>Absender</legend>
+            <p>
+                <input type="text" name="abs_name" id="abs_name" placeholder="Erika Mustermann" />
+                <label for="abs_name">Name des Absenders</label>
+            </p>
+            <p>
+                <input type="text" name="abs_street" id="abs_street" placeholder="Heidestraße 1" />
+                <label for="abs_street">Straße des Absenders</label>
+            </p>
+            <p>
+                <input type="text" name="abs_city" id="abs_city" placeholder="51147 Köln" />
+                <label for="abs_city">PLZ und Stadt des Absenders</label>
+            </p>
+        </fieldset>
+        <fieldset>
+            <legend>Empfänger</legend>
+            <p>
+                <input type="text" name="empf_name" id="empf_name" placeholder="Bundeskanzleramt" />
+                <label for="empf_name">Name des Empfängers</label>
+            </p>
+            <p>
+                <input type="text" name="empf_street" id="empf_street" placeholder="Willy-Brandt-Straße 1" />
+                <label for="empf_street">Straße des Empfängers</label>
+            </p>
+            <p>
+                <input type="text" name="empf_city" id="empf_city" placeholder="10557 Berlin" />
+                <label for="empf_city">PLZ und Stadt des Empfängers</label>
+            </p>
+        </fieldset>
+        <p>
+            <button type="submit">Briefkopf erstellen</button>
+        </p>
+    </form>
+{% endblock %}

@@ -1,0 +1,68 @@
+\documentclass%%
+%---------------------------------------------------------------------------
+  [fontsize=12pt,%%          Schriftgroesse
+%---------------------------------------------------------------------------
+% Satzspiegel
+   paper=a4,%%               Papierformat
+   enlargefirstpage=on,%%    Erste Seite anders
+   pagenumber=headright,%%   Seitenzahl oben mittig
+%---------------------------------------------------------------------------
+% Layout
+   headsepline=on,%%         Linie unter der Seitenzahl
+   parskip=half,%%           Abstand zwischen Absaetzen
+%---------------------------------------------------------------------------
+% Briefkopf und Anschrift
+   fromalign=right,%%        Plazierung des Briefkopfs
+   fromphone=on,%%           Telefonnummer im Absender
+   fromrule=off,%%           Linie im Absender (aftername, afteraddress)
+   fromfax=off,%%            Faxnummer
+   fromemail=off,%%          Emailadresse
+   fromurl=off,%%            Homepage
+   fromlogo=off,%%           Firmenlogo
+   addrfield=on,%%           Adressfeld fuer Fensterkuverts
+   backaddress=on,%%          ...und Absender im Fenster
+   subject=beforeopening,%%  Plazierung der Betreffzeile
+   locfield=narrow,%%        zusaetzliches Feld fuer Absender
+   foldmarks=on,%%           Faltmarken setzen
+   numericaldate=off,%%      Datum numerisch ausgeben
+   refline=narrow,%%         Geschaeftszeile im Satzspiegel
+%---------------------------------------------------------------------------
+% Formatierung
+   draft=off%%                Entwurfsmodus
+]{scrlttr2}
+%---------------------------------------------------------------------------
+\usepackage{polyglossia}
+\setmainlanguage{german}
+\setkomafont{backaddress}{\mdseries}
+\setkomavar{backaddressseparator}{~$\cdot$~}
+
+\begin{document}
+
+% Briefkopf
+\LoadLetterOption{DIN} %% oder: DINmtext, SN, SNleft, KOMAold.
+\makeatletter
+\@setplength{firstheadvpos}{20mm}
+\@setplength{firstheadwidth}{\paperwidth}
+\ifdim \useplength{toaddrhpos}>\z@
+  \@addtoplength[-2]{firstheadwidth}{\useplength{toaddrhpos}}
+\else
+  \@addtoplength[2]{firstheadwidth}{\useplength{toaddrhpos}}
+\fi
+\@setplength{foldmarkhpos}{6.5mm}
+\makeatother
+
+% Variables: Sender
+\setkomavar{fromname}{++ abs_name ++}
+\setkomavar{fromaddress}{++ abs_street ++\\++ abs_city ++}
+
+\setkomavar{signature}{}
+\setkomavar{firsthead}{}
+\setkomavar{date}{}
+
+% Variables: Recipient
+\begin{letter}{++ empf_name ++\\++ empf_street ++\\++ empf_city ++}
+
+\opening{}
+\closing{}
+\end{letter}
+\end{document}
