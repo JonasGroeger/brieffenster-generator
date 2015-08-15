@@ -10,6 +10,7 @@ import subprocess
 
 from flask import Flask, make_response, request
 from flask.templating import render_template
+from flask import Response
 
 import configuration
 
@@ -34,6 +35,12 @@ FILENAME_PDF = 'Vorlage.pdf'
 
 @app.route('/generate', methods=['POST'])
 def generate():
+    params = request.form.to_dict()
+    for k, v in params.items():
+        if not v:
+            return Response(k + ' must be set!', 400)
+        params[k] = v.replace('\\', '')
+
     temp_directory = tempfile.mkdtemp()
 
     # Write the file
