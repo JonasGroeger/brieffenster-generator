@@ -34,7 +34,7 @@ FILENAME_TEX = 'Vorlage.tex'
 FILENAME_PDF = 'Vorlage.pdf'
 
 
-@app.route('/generate', methods=['POST'])
+@app.route('/generate/', methods=['POST'])
 def generate():
     params = request.form.to_dict()
     for k, v in params.items():
