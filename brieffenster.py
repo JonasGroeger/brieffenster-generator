@@ -12,8 +12,6 @@ from flask import Flask, make_response, request
 from flask.templating import render_template
 from flask import Response
 
-import configuration
-
 __author__ = 'Jonas Gröger <jonas.groeger@gmail.com>'
 
 
@@ -26,7 +24,10 @@ class CustomFlask(Flask):
 
 
 app = CustomFlask(__name__)
-app.config.from_object(configuration)
+app.config.from_object(__name__)
+
+DEBUG = True
+SECRET_KEY = '<my_secret_key>'
 
 BASE_DIR = os.path.dirname(__file__)
 FILENAME_TEX = 'Vorlage.tex'
