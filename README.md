@@ -37,7 +37,7 @@ Then `pip install -r requirements.txt`.
 
 Then, include the brieffenster.conf in one of your nginx `server {…}` blocks.
 
-Remember to change the `SECRET_KEY` in `brieffenster.py`.
+Remember to change the `SECRET_KEY` in `brieffenster.py` and `sudo chown -R www-data /var/www/projekte/brieffenster`
 
 Point your browser at http://localhost/projekte/brieffenster
 Have fun!
