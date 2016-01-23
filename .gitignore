@@ -109,3 +109,5 @@ docs/_build/
 # PyBuilder
 target/
 
+# Virtualenvwrapper
+.project
