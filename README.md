@@ -35,7 +35,7 @@ cd /var/www \
     && git clone https://github.com/JonasGroeger/Brieffenster-Generator.git .
 ```
 
-Since python3.4 you can create the nessecary virtual environment
+Since python3.4 you can create the necessary virtual environment
 with `python3 -m venv`. Activate it. Then
 `pip install -r requirements.txt`.
 
@@ -48,5 +48,17 @@ Remember to change the `SECRET_KEY` in `brieffenster.py` and
 Point your browser at http://localhost/projekte/brieffenster
 Have fun!
 
+# Automation
+The PDF generation can be automated using a HTTP POST request, using
+i.e. `curl`:
+
+    curl -X POST 'http://localhost:5000/generate/' \
+        -F "abs_name=Erika Mustermann" \
+        -F "abs_street=Heidestraße 1" \
+        -F "abs_city=51477 Köln" \
+        -F "empf_name=Bundeskanzleramt" \
+        -F "empf_street=Willy-Brand-Straße 1" \
+        -F "empf_city=10577 Berlin"        
+    
 # License
 This project is licensed under the MIT License. See `LICENSE.md`

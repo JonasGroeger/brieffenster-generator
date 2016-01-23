@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import string
+import subprocess
+
 import os
 import random
 import shutil
-import string
 import tempfile
-import subprocess
-
 from flask import Flask, make_response, request
-from flask.templating import render_template
 from flask import Response
+from flask.templating import render_template
 
 __author__ = 'Jonas Gröger <jonas.groeger@gmail.com>'
 
@@ -18,8 +18,8 @@ __author__ = 'Jonas Gröger <jonas.groeger@gmail.com>'
 class CustomFlask(Flask):
     jinja_options = Flask.jinja_options.copy()
     jinja_options.update(dict(
-        variable_start_string='++',
-        variable_end_string='++',
+            variable_start_string='++',
+            variable_end_string='++',
     ))
 
 
@@ -37,6 +37,15 @@ FILENAME_PDF = 'Vorlage.pdf'
 @app.route('/generate/', methods=['POST'])
 def generate():
     params = request.form.to_dict()
+    if not params:
+        return Response('These POST parameters must be set:\n'
+                        'abs_name\n'
+                        'abs_street\n'
+                        'abs_city\n'
+                        'empf_name\n'
+                        'empf_street\n'
+                        'empf_city', 400)
+
     for k, v in params.items():
         if not v:
             return Response(k + ' must be set!', 400)
