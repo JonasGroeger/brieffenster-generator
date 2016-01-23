@@ -1,7 +1,7 @@
 # Brieffenster-Generator
 
 Run with `python3 brieffenster.py` or `./brieffenster.py` if you made
-it executable beforehand with `chmod +x app.py`.
+it executable beforehand with `chmod +x brieffenster.py`.
 
 # Requirements
 For system requirements, you need
