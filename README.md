@@ -41,3 +41,6 @@ Remember to change the `SECRET_KEY` in `brieffenster.py` and `sudo chown -R www-
 
 Point your browser at http://localhost/projekte/brieffenster
 Have fun!
+
+# License
+This project is licensed under the MIT License. See `LICENSE.md`
