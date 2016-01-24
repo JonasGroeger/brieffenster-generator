@@ -2,8 +2,13 @@
 
 # Screenshots
 
-The WebUI: ![Screenshot](screenshots/WebUI.png)
-The generated PDF: [Generated Briefkopf](screenshots/Generated-Briefkopf.pdf)
+## WebUI
+
+![Screenshot](screenshots/WebUI.png)
+
+## The generated PDF
+
+[Generated Briefkopf](screenshots/Generated-Briefkopf.pdf)
 
 # Run locally
 
