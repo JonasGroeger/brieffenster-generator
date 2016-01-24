@@ -1,5 +1,12 @@
 # Brieffenster-Generator
 
+# Screenshots
+
+The WebUI: ![Screenshot](screenshots/WebUI.png)
+The generated PDF: [Generated Briefkopf](screenshots/Generated-Briefkopf.pdf)
+
+# Run locally
+
 Run with `python3 brieffenster.py` or `./brieffenster.py` if you made
 it executable beforehand with `chmod +x brieffenster.py`.
 
@@ -58,7 +65,7 @@ i.e. `curl`:
         -F "abs_city=51477 Köln" \
         -F "empf_name=Bundeskanzleramt" \
         -F "empf_street=Willy-Brand-Straße 1" \
-        -F "empf_city=10577 Berlin"        
-    
+        -F "empf_city=10577 Berlin"
+
 # License
 This project is licensed under the MIT License. See `LICENSE.md`
