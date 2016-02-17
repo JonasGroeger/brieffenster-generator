@@ -1,5 +1,7 @@
 # Brieffenster-Generator
 
+Sometimes, you just need the header.
+
 # Screenshots
 
 ## WebUI
