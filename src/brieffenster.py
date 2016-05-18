@@ -15,21 +15,22 @@ from flask.templating import render_template
 __author__ = 'Jonas Gröger <jonas.groeger@gmail.com>'
 
 
+# Work around latex getting fucked by curly braces
 class CustomFlask(Flask):
     jinja_options = Flask.jinja_options.copy()
     jinja_options.update(dict(
-            variable_start_string='++',
-            variable_end_string='++',
+        variable_start_string='++',
+        variable_end_string='++',
     ))
 
 
 app = CustomFlask(__name__)
 app.config.from_object(__name__)
 
-DEBUG = True
-SECRET_KEY = '<my_secret_key>'
+app.secret_key = '<my_secret_key>'
+app.debug = False
 
-BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 FILENAME_TEX = 'Vorlage.tex'
 FILENAME_PDF = 'Vorlage.pdf'
 
@@ -61,7 +62,7 @@ def generate():
 
     # Render
     os.chdir(temp_directory)
-    proc = subprocess.Popen(['xelatex', FILENAME_TEX])
+    proc = subprocess.Popen(['xelatex', FILENAME_TEX], stdout=subprocess.DEVNULL)
     proc.communicate()
 
     # Get the bytes
@@ -73,6 +74,8 @@ def generate():
     shutil.rmtree(temp_directory)
 
     filename_download = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
+
+    print("Creating Briefkopf ({} bytes) in {}".format(len(pdf_bytes), temp_directory))
 
     response = make_response(pdf_bytes)
     response.headers['Content-Disposition'] = "attachment; filename=" + filename_download + '.pdf'
