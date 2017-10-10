@@ -1,13 +1,12 @@
-FROM ubuntu:xenial
+FROM alpine:latest
 
 MAINTAINER Jonas Gröger <brieffenster@jonas.huntun.de>
 
-RUN apt-get update && apt-get install --yes \
-    python3 \
-    python3-pip
-RUN ls /app
-COPY /src /app/
+# Install some dependencies
+RUN apk --no-cache add python3 && \
+    pip3 install --upgrade pip
 
+COPY /src /app/
+COPY requirements.txt /app/
 RUN ls /app
-RUN pip3 install --upgrade pip3
-RUN pip3 install -r /app/requirements.txt
+#RUN pip3 install --upgrade pip && pip3 install -r /app/requirements.txt
