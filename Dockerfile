@@ -2,11 +2,14 @@ FROM alpine:latest
 
 MAINTAINER Jonas Gröger <brieffenster@jonas.huntun.de>
 
-# Install some dependencies
+ENV LIBRARY_PATH=/lib:/usr/lib
 RUN apk --no-cache add python3 && \
-    pip3 install --upgrade pip
+    apk --no-cache add build-base python3-dev jpeg-dev zlib-dev && \
+    pip3 install --upgrade pip pipenv
 
 COPY /src /app/
-COPY requirements.txt /app/
-RUN ls /app
-#RUN pip3 install --upgrade pip && pip3 install -r /app/requirements.txt
+COPY Pipfile.lock /app/
+
+WORKDIR /app
+
+RUN pipenv install --ignore-pipfile --system && rm -f Pipfile
