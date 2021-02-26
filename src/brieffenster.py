@@ -84,12 +84,12 @@ def generate():
         request.form['empf_city'],
     )
 
-    filename_download = 'Briefkopf_{}.pdf'.format(request.form['empf_name'])
+    filename_download = 'Briefkopf.pdf'.format(request.form['empf_name'])
 
     print("Creating Briefkopf ({} bytes) in {}".format(len(pdf_bytes), filename_download))
 
     response = make_response(pdf_bytes)
-    response.headers['Content-Disposition'] = "attachment; filename=" + filename_download + '.pdf'
+    response.headers['Content-Disposition'] = "attachment; filename=" + filename_download
     response.mimetype = 'application/pdf'
     return response
 
