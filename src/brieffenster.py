@@ -13,7 +13,7 @@ from reportlab.pdfgen import canvas
 app = Flask(__name__)
 app.config.update(
     DEBUG=False,
-    SECRET_KEY='...'
+    SECRET_KEY='2012093812093'
 )
 
 
@@ -100,4 +100,4 @@ def hello_world():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')

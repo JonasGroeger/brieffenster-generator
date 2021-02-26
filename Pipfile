@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 flask = "*"
+reportlab = "*"
+pillow = "*"
+gunicorn = "*"
 
 [dev-packages]
 
