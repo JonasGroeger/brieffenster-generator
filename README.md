@@ -25,7 +25,7 @@ Sometimes, you just need the header.
 # Optional: Automation
 The PDF generation can be automated using a HTTP POST request, using i.e. `curl`:
 
-    curl -X POST 'http://localhost:5000/generate/' \
+    curl -X POST 'http://localhost:10000/generate/' \
         -F "abs_name=Erika Mustermann" \
         -F "abs_street=Heidestraße 1" \
         -F "abs_city=51477 Köln" \
