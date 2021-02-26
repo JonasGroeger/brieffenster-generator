@@ -15,4 +15,4 @@ RUN pipenv install --system --deploy --ignore-pipfile
 
 COPY /src /app/
 
-CMD ["gunicorn", "wsgi:app", "--bind", "0.0.0.0:5000", "--workers", "4"]
+CMD ["gunicorn", "wsgi:app", "--bind", "0.0.0.0:10000", "--workers", "4"]
