@@ -2,7 +2,8 @@
 
 Sometimes, you just need the header.
 
-You can find a [screencast of the installation on asciinema.org](https://asciinema.org/a/394598).
+* Live @ [https://brieffenster.jonasgroeger.de/](https://brieffenster.jonasgroeger.de/)
+* [Installation screencast @ Asciinema.org](https://asciinema.org/a/394598)
 
 # Screenshots
 
