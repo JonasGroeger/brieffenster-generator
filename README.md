@@ -2,6 +2,8 @@
 
 Sometimes, you just need the header.
 
+[![asciicast](https://asciinema.org/a/394598 .png)](https://asciinema.org/a/394598 )
+
 # Screenshots
 
 ## WebUI
