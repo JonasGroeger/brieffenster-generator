@@ -20,7 +20,7 @@ Sometimes, you just need the header.
 1. Change the `SECRET_KEY` in `src/brieffenster.py`.
 2. ./build-docker
 3. ./run-docker
-4. Go to [the frontend](http://localhost:5000/)
+4. Go to [the frontend](http://localhost:10000/)
 
 # Optional: Automation
 The PDF generation can be automated using a HTTP POST request, using i.e. `curl`:
