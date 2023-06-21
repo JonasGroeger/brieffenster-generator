@@ -8,8 +8,8 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.9"
 Flask = "^2.3.2"
-reportlab = "^3.5.67"
-Pillow = "^8.2.0"
+reportlab = "^4.0.4"
+Pillow = "^9.5.0"
 gunicorn = "^20.1.0"
 
 [tool.poetry.dev-dependencies]
