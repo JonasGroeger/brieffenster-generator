@@ -1,6 +1,6 @@
 FROM python:3.12.2-alpine3.19
 
-MAINTAINER Jonas Gröger <jonas@huntun.de>
+LABEL maintainer="Jonas Gröger <jonas@huntun.de>"
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONFAULTHANDLER=1 \
@@ -11,9 +11,11 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=yes \
     PIP_DEFAULT_TIMEOUT=100 \
     \
+    POETRY_HOME="/opt/poetry" \
     POETRY_VERSION=1.7.1 \
-    POETRY_HOME="/opt/poetry"
+    POETRY_VIRTUALENVS_CREATE=false
 
+# Poetry gets installed here
 ENV PATH="$POETRY_HOME/bin:$PATH"
 
 RUN apk add --no-cache -U \
