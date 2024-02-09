@@ -1,2 +1,1 @@
-* Add docker-compose instead of shell scripts
 * Add client-side (js) validation

@@ -1,4 +1,0 @@
-#!/bin/sh
-
-docker run -p 10000:10000 --restart unless-stopped -t brieffenster-generator:latest
-
