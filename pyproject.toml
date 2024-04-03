@@ -9,7 +9,7 @@ license = "MIT"
 python = "^3.9"
 Flask = "^3.0.2"
 reportlab = "^4.0.4"
-Pillow = "^10.2.0"
+Pillow = "^10.3.0"
 gunicorn = "^21.2.0"
 
 [tool.poetry.dev-dependencies]
