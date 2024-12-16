@@ -1,4 +1,4 @@
-FROM python:3.12.2-alpine3.19
+FROM python:3.12.8-alpine3.21
 
 LABEL maintainer="Jonas Gröger <jonas@huntun.de>"
 
@@ -12,7 +12,7 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_DEFAULT_TIMEOUT=100 \
     \
     POETRY_HOME="/opt/poetry" \
-    POETRY_VERSION=1.7.1 \
+    POETRY_VERSION=1.8.5 \
     POETRY_VIRTUALENVS_CREATE=false
 
 # Poetry gets installed here
@@ -32,7 +32,7 @@ RUN curl -sSL https://install.python-poetry.org | python3 -
 
 WORKDIR /app
 COPY poetry.lock pyproject.toml ./
-RUN poetry install --no-root
+RUN poetry install
 
 COPY src/ docker-entrypoint /app/
 EXPOSE 10000

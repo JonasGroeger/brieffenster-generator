@@ -1,0 +1,8 @@
+name: brieffenster-generator
+services:
+  generator:
+    restart: unless-stopped
+    build: .
+    ports:
+      - "127.0.0.1:10000:10000"
+
