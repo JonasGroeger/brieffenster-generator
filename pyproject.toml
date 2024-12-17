@@ -1,17 +1,17 @@
 [tool.poetry]
 name = "brieffenster-generator"
 version = "0.1.0"
-description = ""
+description = "Live @ https://brieffenster.jonasgroeger.de/"
 authors = ["Jonas Groeger <jonas@huntun.de>"]
 license = "MIT"
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.12"
 Flask = "^3.0.2"
 reportlab = "^4.0.4"
-Pillow = "^10.2.0"
-gunicorn = "^21.2.0"
+Pillow = "11.0.0"
+gunicorn = "23.0.0"
 
 [tool.poetry.dev-dependencies]
 
