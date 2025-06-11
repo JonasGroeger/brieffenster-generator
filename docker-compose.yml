@@ -1,4 +1,5 @@
 name: brieffenster-generator
+
 services:
   generator:
     restart: unless-stopped

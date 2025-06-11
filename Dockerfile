@@ -1,18 +1,18 @@
-FROM python:3.12.8-alpine3.21
+FROM python:3.12-alpine
 
 LABEL maintainer="Jonas Gröger <jonas@huntun.de>"
 
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONFAULTHANDLER=1 \
-    PYTHONHASHSEED=random \
-    PYTHONDONTWRITEBYTECODE=1 \
-    \
-    PIP_NO_CACHE_DIR=yes \
-    PIP_DISABLE_PIP_VERSION_CHECK=yes \
-    PIP_DEFAULT_TIMEOUT=100 \
-    \
-    POETRY_HOME="/opt/poetry" \
-    POETRY_VERSION=1.8.5 \
+# Python: disable bytecode (.pyc) files
+# https://docs.python.org/3.11/using/cmdline.html
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONFAULTHANDLER=1
+
+ENV PIP_NO_CACHE_DIR=yes \
+    PIP_DISABLE_PIP_VERSION_CHECK=yes
+
+ENV POETRY_HOME="/opt/poetry" \
+    POETRY_VERSION=2.1.3 \
     POETRY_VIRTUALENVS_CREATE=false
 
 # Poetry gets installed here
@@ -28,7 +28,7 @@ RUN apk add --no-cache -U \
     git
 
 # Install Poetry version $POETRY_VERSION to $POETRY_HOME
-RUN curl -sSL https://install.python-poetry.org | python3 -
+RUN curl -sSL "https://install.python-poetry.org" | python3 -
 
 WORKDIR /app
 COPY poetry.lock pyproject.toml ./
