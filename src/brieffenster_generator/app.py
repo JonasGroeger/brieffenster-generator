@@ -6,24 +6,20 @@ import os
 from importlib.resources import files
 from io import BytesIO
 
-from flask import Flask, jsonify, make_response, request, render_template
-from werkzeug.exceptions import HTTPException
+from flask import Flask, jsonify, make_response, render_template, request
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 from reportlab.pdfgen import canvas
 
 app = Flask(__name__)
 app.config.update(DEBUG=False, SECRET_KEY=os.environ["SECRET_KEY"])
 
 # Set up logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 
@@ -71,6 +67,7 @@ def select_font(text, font_size):
         return ("STSong-Light", font_size)
     return ("LM", font_size)
 
+
 # Constants for input validation
 MAX_FIELD_LENGTH = 200
 
@@ -93,7 +90,6 @@ def generate_pdf_data(abs_name, abs_addr, abs_city, empf_name, empf_addr, empf_c
         Exception: If PDF generation fails
     """
     try:
-
         ruecksendeangabe = "·".join([abs_name, abs_addr, abs_city])
 
         ABSTAND_LINKS = 25 * mm
@@ -111,9 +107,7 @@ def generate_pdf_data(abs_name, abs_addr, abs_city, empf_name, empf_addr, empf_c
         rueck_font = "LM"
         rueck_font_size = 8
         c.setFont(rueck_font, rueck_font_size)
-        c.drawString(
-            ABSTAND_LINKS, page_height - (ABSTAND_OBEN + ZEILENHOEHE), ruecksendeangabe
-        )
+        c.drawString(ABSTAND_LINKS, page_height - (ABSTAND_OBEN + ZEILENHOEHE), ruecksendeangabe)
 
         # Rücksendeangabe Linie
         text_width = stringWidth(ruecksendeangabe, rueck_font, rueck_font_size)
@@ -161,8 +155,12 @@ def generate_pdf_data(abs_name, abs_addr, abs_city, empf_name, empf_addr, empf_c
 def generate():
     """Generate a PDF letter header from form data."""
     required_fields = [
-        "abs_name", "abs_street", "abs_city",
-        "empf_name", "empf_street", "empf_city"
+        "abs_name",
+        "abs_street",
+        "abs_city",
+        "empf_name",
+        "empf_street",
+        "empf_city",
     ]
     params = request.form.to_dict()
 
@@ -170,19 +168,23 @@ def generate():
     missing_fields = [f for f in required_fields if not params.get(f, "").strip()]
     if missing_fields:
         logger.warning(f"Form submission missing fields: {missing_fields}")
-        return jsonify({
-            "error": "Validation error",
-            "message": f"Missing required fields: {', '.join(missing_fields)}"
-        }), 400
+        return jsonify(
+            {
+                "error": "Validation error",
+                "message": f"Missing required fields: {', '.join(missing_fields)}",
+            }
+        ), 400
 
     # Validate field lengths
     oversized_fields = [f for f in required_fields if len(params.get(f, "")) > MAX_FIELD_LENGTH]
     if oversized_fields:
         logger.warning(f"Form submission with oversized fields: {oversized_fields}")
-        return jsonify({
-            "error": "Validation error",
-            "message": f"Fields exceed maximum length of {MAX_FIELD_LENGTH} characters: {', '.join(oversized_fields)}"
-        }), 400
+        return jsonify(
+            {
+                "error": "Validation error",
+                "message": f"Fields exceed maximum length of {MAX_FIELD_LENGTH} characters: {', '.join(oversized_fields)}",
+            }
+        ), 400
 
     # Sanitize input: strip whitespace
     params = {k: v.strip() for k, v in params.items()}
@@ -200,29 +202,35 @@ def generate():
 
         # Create filename with hash
         param_hash = hashlib.sha256(
-            "|".join([
-                params["abs_name"], params["abs_street"], params["abs_city"],
-                params["empf_name"], params["empf_street"], params["empf_city"],
-            ]).encode()
+            "|".join(
+                [
+                    params["abs_name"],
+                    params["abs_street"],
+                    params["abs_city"],
+                    params["empf_name"],
+                    params["empf_street"],
+                    params["empf_city"],
+                ]
+            ).encode()
         ).hexdigest()[:8]
         filename_download = f"Briefkopf-{param_hash}.pdf"
 
         logger.info(f"Generated PDF: {filename_download} ({len(pdf_bytes)} bytes)")
 
         response = make_response(pdf_bytes)
-        response.headers["Content-Disposition"] = (
-            f'attachment; filename="{filename_download}"'
-        )
+        response.headers["Content-Disposition"] = f'attachment; filename="{filename_download}"'
         response.headers["Content-Length"] = len(pdf_bytes)
         response.mimetype = "application/pdf"
         return response
 
     except Exception as e:
         logger.error(f"PDF generation error: {e}", exc_info=True)
-        return jsonify({
-            "error": "PDF generation failed",
-            "message": "An error occurred while generating the PDF"
-        }), 500
+        return jsonify(
+            {
+                "error": "PDF generation failed",
+                "message": "An error occurred while generating the PDF",
+            }
+        ), 500
 
 
 @app.route("/health")
