@@ -6,4 +6,6 @@ services:
     build: .
     ports:
       - "127.0.0.1:10000:10000"
+    env_file:
+      - .env
 

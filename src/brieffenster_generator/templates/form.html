@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block body %}
+    <h1>Erstellung des Briefkopfes</h1>
+    <form action="{{ url_for('generate') }}" method="post" novalidate>
+        <div class="fieldsets-container">
+            <fieldset>
+                <legend>Absender</legend>
+                <p>
+                    <label for="abs_name">Name des Absenders</label>
+                    <input type="text" name="abs_name" id="abs_name" placeholder="Erika Mustermann" required autofocus />
+                </p>
+                <p>
+                    <label for="abs_street">Straße des Absenders</label>
+                    <input type="text" name="abs_street" id="abs_street" placeholder="Heidestraße 1" required />
+                </p>
+                <p>
+                    <label for="abs_city">PLZ und Stadt des Absenders</label>
+                    <input type="text" name="abs_city" id="abs_city" placeholder="51147 Köln" required />
+                </p>
+            </fieldset>
+            <fieldset>
+                <legend>Empfänger</legend>
+                <p>
+                    <label for="empf_name">Name des Empfängers</label>
+                    <input type="text" name="empf_name" id="empf_name" placeholder="Bundeskanzleramt" required />
+                </p>
+                <p>
+                    <label for="empf_street">Straße des Empfängers</label>
+                    <input type="text" name="empf_street" id="empf_street" placeholder="Willy-Brandt-Straße 1" required />
+                </p>
+                <p>
+                    <label for="empf_city">PLZ und Stadt des Empfängers</label>
+                    <input type="text" name="empf_city" id="empf_city" placeholder="10557 Berlin" required />
+                </p>
+            </fieldset>
+        </div>
+        <div class="buttons-container">
+            <button type="button" class="demo-button" onclick="fillDemoData()">Demo</button>
+            <button type="submit">Briefkopf erstellen</button>
+        </div>
+    </form>
+    <script>
+        function fillDemoData() {
+            document.getElementById('abs_name').value = 'Max Mustermann';
+            document.getElementById('abs_street').value = 'Musterstraße 42';
+            document.getElementById('abs_city').value = '12345 Musterstadt';
+            document.getElementById('empf_name').value = '王芃 (Wei Zhang)';
+            document.getElementById('empf_street').value = '朝阳区建国路 88 号';
+            document.getElementById('empf_city').value = '100010 北京市';
+        }
+    </script>
+{% endblock %}
